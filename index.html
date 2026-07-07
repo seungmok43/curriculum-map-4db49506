@@ -1,0 +1,353 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>삶이 있는 신앙 — 커리큘럼 재편 구조도</title>
+<style>
+  :root{
+    --ink:#1f2a22; --ink-soft:#4a564d; --paper:#fafaf7; --line:#d9e0d8;
+    --pine:#2f6b4f; --pine-deep:#24523d; --moss:#eef3ec; --moss-deep:#dfe9dd;
+    --amber:#b7791f; --amber-bg:#faf3e3; --indigo:#4a5899; --indigo-bg:#eceff8;
+    --mono:"SF Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;
+    line-height:1.65;font-size:16px;
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px 96px}
+  header.hero{border-bottom:3px solid var(--pine);padding:56px 0 28px;margin-bottom:8px}
+  .eyebrow{font-size:12px;letter-spacing:.18em;color:var(--pine);font-weight:700;text-transform:uppercase;margin:0 0 10px}
+  h1{font-size:clamp(26px,4.5vw,38px);line-height:1.25;margin:0 0 14px;font-weight:800;text-wrap:balance}
+  .hero p.lede{color:var(--ink-soft);margin:0;max-width:44em}
+  .meta{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;font-size:13px;color:var(--ink-soft)}
+  .meta b{color:var(--ink)}
+  nav.toc{position:sticky;top:0;background:var(--paper);border-bottom:1px solid var(--line);
+    display:flex;gap:4px;overflow-x:auto;padding:10px 0;margin-bottom:36px;z-index:9}
+  nav.toc a{white-space:nowrap;text-decoration:none;color:var(--ink-soft);font-size:13.5px;font-weight:600;
+    padding:6px 12px;border-radius:99px}
+  nav.toc a:hover,nav.toc a:focus-visible{background:var(--moss);color:var(--pine-deep);outline:2px solid transparent}
+  section{margin:0 0 60px}
+  h2{font-size:22px;font-weight:800;margin:0 0 6px;color:var(--pine-deep);text-wrap:balance}
+  h2 .no{font-family:var(--mono);font-size:14px;color:var(--pine);margin-right:10px;font-weight:600}
+  .sub{color:var(--ink-soft);font-size:14.5px;margin:0 0 20px;max-width:46em}
+  h3{font-size:16.5px;font-weight:700;margin:28px 0 10px}
+
+  /* summary strip */
+  .keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:24px}
+  .key{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .key .k-label{font-size:12px;letter-spacing:.1em;color:var(--ink-soft);font-weight:700;margin-bottom:6px}
+  .key .k-val{font-size:15.5px;font-weight:700;line-height:1.45}
+  .key.k-new{border-color:#e5cf9b;background:var(--amber-bg)}
+  .key.k-new .k-val{color:var(--amber)}
+  .key.k-out{border-color:#c3caea;background:var(--indigo-bg)}
+  .key.k-out .k-val{color:var(--indigo)}
+  .key.k-keep .k-val{color:var(--pine-deep)}
+
+  /* tables */
+  .tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px}
+  th{background:var(--moss);color:var(--pine-deep);text-align:left;font-size:13px;letter-spacing:.04em;
+    padding:10px 14px;border-bottom:1px solid var(--line)}
+  td{padding:11px 14px;border-bottom:1px solid #edf1ec;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.yr{font-weight:800;white-space:nowrap;color:var(--pine-deep);background:#f5f8f4}
+  .cell-t{font-weight:700}
+  .cell-s{display:block;font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+  td.is-new{background:var(--amber-bg);box-shadow:inset 3px 0 0 var(--amber)}
+  td.is-new .cell-t{color:var(--amber)}
+  td.is-shift{background:#fdfcf7}
+  .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.06em;border-radius:4px;
+    padding:1.5px 7px;vertical-align:1px;margin-left:6px}
+  .tag.new{background:var(--amber);color:#fff}
+  .tag.shift{background:#e7dfc6;color:#6b5a1e}
+  .tag.keep{background:var(--moss-deep);color:var(--pine-deep)}
+  .tag.grad{background:var(--pine);color:#fff}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--ink-soft);margin:12px 2px 0}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .sw{width:13px;height:13px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.08)}
+
+  /* flow diagram */
+  .flow{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px;overflow-x:auto}
+  .flow-row{display:flex;align-items:stretch;gap:0;min-width:700px}
+  .fbox{flex:1;border:1.5px solid var(--line);border-radius:8px;padding:10px 12px;font-size:13.5px;
+    background:var(--moss);text-align:center;min-width:118px}
+  .fbox b{display:block;font-size:12px;color:var(--pine-deep);letter-spacing:.05em;margin-bottom:3px}
+  .fbox.newq{background:var(--amber-bg);border-color:var(--amber)}
+  .fbox.newq b{color:var(--amber)}
+  .fbox.outq{background:var(--indigo-bg);border-color:var(--indigo)}
+  .fbox.outq b{color:var(--indigo)}
+  .farrow{align-self:center;padding:0 7px;color:var(--pine);font-weight:800;font-size:16px}
+  .flow-note{font-size:13px;color:var(--ink-soft);margin-top:14px}
+  .flow + .flow{margin-top:14px}
+  .flow .rowlabel{font-size:12px;font-weight:800;letter-spacing:.12em;color:var(--ink-soft);margin:0 0 12px}
+
+  /* module cards */
+  .mods{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+  .mod{background:#fff;border:1px solid var(--line);border-radius:10px;padding:15px 17px}
+  .mod .m-head{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+  .mod .m-no{font-family:var(--mono);font-size:12px;color:var(--pine);font-weight:700}
+  .mod .m-name{font-weight:800;font-size:15.5px}
+  .mod .m-optic{font-size:12px;color:var(--ink-soft);margin-left:auto;white-space:nowrap}
+  .mod p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+  .mod.aux{background:var(--moss);border-style:dashed}
+
+  /* lesson list */
+  ol.lessons{margin:0;padding-left:0;list-style:none;counter-reset:l}
+  ol.lessons li{counter-increment:l;display:flex;gap:12px;padding:8px 4px;border-bottom:1px solid #edf1ec;font-size:14.5px}
+  ol.lessons li::before{content:counter(l,decimal-leading-zero);font-family:var(--mono);color:var(--pine);
+    font-weight:700;font-size:13px;padding-top:2px;min-width:24px}
+  ol.lessons li:last-child{border-bottom:none}
+  .pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+  .panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+  .panel h3{margin-top:0}
+  .panel.track-a{border-top:3px solid var(--pine)}
+  .panel.track-b{border-top:3px solid var(--indigo)}
+
+  /* status */
+  .steps{display:flex;flex-direction:column;gap:0;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .step{display:flex;gap:14px;padding:13px 18px;border-bottom:1px solid #edf1ec;font-size:14.5px;align-items:baseline}
+  .step:last-child{border-bottom:none}
+  .st{font-size:11px;font-weight:800;letter-spacing:.06em;border-radius:4px;padding:2px 8px;white-space:nowrap}
+  .st.done{background:var(--moss-deep);color:var(--pine-deep)}
+  .st.run{background:var(--amber-bg);color:var(--amber);border:1px solid #e5cf9b}
+  .st.wait{background:#f0f0ee;color:#888}
+  .step .s-name{font-weight:700;min-width:0}
+  .step .s-note{color:var(--ink-soft);font-size:13px}
+
+  .callout{background:var(--moss);border-left:4px solid var(--pine);border-radius:0 8px 8px 0;
+    padding:14px 18px;font-size:14px;margin:18px 0}
+  .callout.warn{background:var(--amber-bg);border-color:var(--amber)}
+  footer{border-top:1px solid var(--line);margin-top:70px;padding-top:18px;font-size:12.5px;color:var(--ink-soft)}
+  @media (prefers-reduced-motion:no-preference){
+    section{scroll-margin-top:64px}
+  }
+  @media (max-width:560px){
+    body{font-size:15px}
+    .meta{gap:6px 14px}
+  }
+</style></head><body>
+
+<div class="wrap">
+
+<header class="hero">
+  <p class="eyebrow">삶이 있는 신앙 공과 · 커리큘럼 재편</p>
+  <h1>원전 세계관 교재를 첫 분기로,<br>「제자의 삶」은 제자반으로</h1>
+  <p class="lede">『삶이있는신앙시리즈 1』(2024, 이재섭 외 집필)의 1부 &lt;성경적 세계관&gt; 11과를 1년차 1분기에 편입하고, 구 1년차 4분기 「제자의 삶」을 제자반·수련회 전용 과정으로 분리하는 재편의 전체 구조도.</p>
+  <div class="meta">
+    <span>대상 <b>유년·초등·중등·고등 4개 부서</b></span>
+    <span>정규과정 <b>3년 12분기 · 부서당 130과</b></span>
+    <span>별도과정 <b>제자반 11과 × 4부서</b></span>
+    <span>기준일 <b>2026-07-07</b></span>
+  </div>
+</header>
+
+<nav class="toc" aria-label="목차">
+  <a href="#s1">한눈 요약</a>
+  <a href="#s2">재편 전후 그리드</a>
+  <a href="#s3">무엇이 어떻게 움직였나</a>
+  <a href="#s4">새 1분기 11과</a>
+  <a href="#s5">제자반 과정</a>
+  <a href="#s6">공과 한 과의 구성</a>
+  <a href="#s7">진행 현황</a>
+</nav>
+
+<section id="s1">
+  <h2><span class="no">01</span>한눈 요약</h2>
+  <p class="sub">이번 재편은 세 수로 끝난다 — 넣고, 밀고, 떼기. 수술 범위는 1년차 안에서 상쇄되어 2·3년차 88과×4부서는 파일 하나 움직이지 않는다.</p>
+  <div class="keys">
+    <div class="key k-new">
+      <div class="k-label">넣기</div>
+      <div class="k-val">원전 1부 「성경적 세계관」 11과 → 1년차 1분기 신설</div>
+    </div>
+    <div class="key">
+      <div class="k-label">밀기</div>
+      <div class="k-val">구 1년차 1·2·3분기가 한 칸씩 뒤로 (1년차 내부에서만)</div>
+    </div>
+    <div class="key k-out">
+      <div class="k-label">떼기</div>
+      <div class="k-val">구 1년차 4분기 「제자의 삶」 → 제자반·수련회 과정</div>
+    </div>
+    <div class="key k-keep">
+      <div class="k-label">지키기</div>
+      <div class="k-val">2·3년차 무변동 — 창조·타락·구속 개막 리듬과 졸업 서사 보존</div>
+    </div>
+  </div>
+</section>
+
+<section id="s2">
+  <h2><span class="no">02</span>재편 후 전체 그리드 (3년 × 4분기)</h2>
+  <p class="sub">네 부서가 같은 주일에 같은 주제를 부서 눈높이의 다른 본문으로 배운다. 아래 그리드는 부서 공통.</p>
+  <div class="tblwrap">
+  <table>
+    <thead><tr><th>년차</th><th>1분기</th><th>2분기</th><th>3분기</th><th>4분기</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="yr">1년차<span class="cell-s">세계관과 말씀의 기초</span></td>
+        <td class="is-new"><span class="cell-t">성경적 세계관</span><span class="tag new">신설</span>
+          <span class="cell-s">관점·전제·다르다vs틀리다·창조-타락-구속 (원전 1부)</span></td>
+        <td class="is-shift"><span class="cell-t">말씀과 삶의 기초</span><span class="tag shift">← 구 1-1</span>
+          <span class="cell-s">창조·타락·구속·진리·말씀·예배</span></td>
+        <td class="is-shift"><span class="cell-t">하나님의 성품과 구원</span><span class="tag shift">← 구 1-2</span>
+          <span class="cell-s">신론·인간론·속죄·구원</span></td>
+        <td class="is-shift"><span class="cell-t">예수님의 생애</span><span class="tag shift">← 구 1-3</span>
+          <span class="cell-s">예언·탄생·공생애·십자가·부활</span></td>
+      </tr>
+      <tr>
+        <td class="yr">2년차<span class="cell-s">구속사와 성경의 이해</span></td>
+        <td><span class="cell-t">구속사</span><span class="tag keep">무변동</span>
+          <span class="cell-s">창조-타락-구속을 사랑의 서사로</span></td>
+        <td><span class="cell-t">조직신학</span><span class="tag keep">무변동</span>
+          <span class="cell-s">신론·인간론 심화</span></td>
+        <td><span class="cell-t">구약 언약사</span><span class="tag keep">무변동</span>
+          <span class="cell-s">족장·출애굽·사사·왕국·포로기</span></td>
+        <td><span class="cell-t">신약 언약 성취</span><span class="tag keep">무변동</span>
+          <span class="cell-s">공관·요한·사도행전·서신·계시록</span></td>
+      </tr>
+      <tr>
+        <td class="yr">3년차<span class="cell-s">하나님 나라의 삶</span></td>
+        <td><span class="cell-t">하나님 나라의 관점</span><span class="tag keep">무변동</span>
+          <span class="cell-s">창조-타락-구속 + 정치·경제·교육·미디어 영역별 적용</span></td>
+        <td><span class="cell-t">하나님 나라와 관계</span><span class="tag keep">무변동</span>
+          <span class="cell-s">가정·친구·교회·이웃·갈등과 용서·다문화</span></td>
+        <td><span class="cell-t">하나님 나라의 성품</span><span class="tag keep">무변동</span>
+          <span class="cell-s">겸손·감사·인내·용기·긍휼·절제 — 성령의 열매</span></td>
+        <td><span class="cell-t">하나님 나라의 사명</span><span class="tag grad">졸업</span>
+          <span class="cell-s">부르심·은사·전도·선교·헌신·공동체·졸업</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="legend">
+    <span><span class="sw" style="background:var(--amber-bg);box-shadow:inset 2px 0 0 var(--amber)"></span>신설 (원전 편입)</span>
+    <span><span class="sw" style="background:#fdfcf7;border-color:#e0dcc8"></span>한 칸 이동 (내용 무변경)</span>
+    <span><span class="sw" style="background:#fff"></span>무변동</span>
+    <span><span class="sw" style="background:var(--indigo-bg);border-color:var(--indigo)"></span>제자반으로 분리 (아래 05)</span>
+  </div>
+  <div class="callout">
+    <b>창조-타락-구속 개막 리듬.</b> 이 커리큘럼은 매 년차를 창조·타락·구속 3부작으로 열되 해마다 렌즈를 바꾼다(1년차 말씀 → 2년차 구속사 → 3년차 하나님 나라). 재편 후에도 2·3년차 개막은 그대로이고, 1년차만 1분기 9과(개념 예고편) → 2분기 1~3과(본문 3과 전개)의 나선형이 된다.
+  </div>
+</section>
+
+<section id="s3">
+  <h2><span class="no">03</span>무엇이 어떻게 움직였나 — 1년차 수술도</h2>
+  <p class="sub">떼어낸 칸(구 4분기)이 밀어 넣은 칸(신 1분기)과 같은 년차의 양 끝이라, 이동이 1년차 내부에서 정확히 상쇄된다.</p>
+
+  <div class="flow">
+    <p class="rowlabel">재편 전 — 1년차</p>
+    <div class="flow-row">
+      <div class="fbox"><b>1분기</b>말씀과 삶의 기초</div><div class="farrow">→</div>
+      <div class="fbox"><b>2분기</b>하나님의 성품과 구원</div><div class="farrow">→</div>
+      <div class="fbox"><b>3분기</b>예수님의 생애</div><div class="farrow">→</div>
+      <div class="fbox outq"><b>4분기</b>제자의 삶</div>
+    </div>
+  </div>
+  <div class="flow">
+    <p class="rowlabel">재편 후 — 1년차</p>
+    <div class="flow-row">
+      <div class="fbox newq"><b>1분기 · 신설</b>성경적 세계관</div><div class="farrow">→</div>
+      <div class="fbox"><b>2분기</b>말씀과 삶의 기초</div><div class="farrow">→</div>
+      <div class="fbox"><b>3분기</b>하나님의 성품과 구원</div><div class="farrow">→</div>
+      <div class="fbox"><b>4분기</b>예수님의 생애</div>
+    </div>
+    <p class="flow-note">「제자의 삶」 11과 × 4부서는 정규 그리드 밖의 <b style="color:var(--indigo)">제자반/수련회 과정</b>으로 — 파일 내용 무변경 이동. 원전 2부(창조·말씀·사사시대·예배·헌금)는 이미 기존 과에 확장 수록되어 있어 별도 편입 없이 기존 과의 「읽을거리」로 보강 흡수.</p>
+  </div>
+</section>
+
+<section id="s4">
+  <h2><span class="no">04</span>새 1년차 1분기 — 「성경적 세계관」 11과</h2>
+  <p class="sub">원전 1부를 부서별 4벌로 조판(유·초등판 → 유년·초등 / 중·고등판 → 중등·고등). 원문 전량 보존, 9모듈 재배치.</p>
+  <div class="panel">
+    <ol class="lessons">
+      <li>행동의 이면에 있는 관점(틀) ①</li>
+      <li>행동의 이면에 있는 관점(틀) ②</li>
+      <li>관점에 따라 달라지는 사실 ①</li>
+      <li>관점에 따라 달라지는 사실 ②</li>
+      <li>모든 주장의 배경에 있는 전제(믿음, 신념) ①</li>
+      <li>모든 주장의 배경에 있는 전제(믿음, 신념) ②</li>
+      <li>일반적 세계관과 성경적 세계관의 차이: 다르다 vs 틀리다 ①</li>
+      <li>일반적 세계관과 성경적 세계관의 차이: 다르다 vs 틀리다 ②</li>
+      <li>성경적 세계관의 핵심: 창조-타락-구속</li>
+      <li>성경적 세계관의 실제: '삶이 있는 신앙'</li>
+      <li>특강 — 세계관에 기초한 이야기(유·초등) / 설교(중·고등, 왕하 6:14-17)</li>
+    </ol>
+  </div>
+  <div class="callout warn">
+    <b>감수 이월.</b> 이론 워크북 성격이라 성경 인용이 없는 과(1·3·5·7과)는 외울말씀 지정이 필요하고, 분별력 키우기 전 과 신규 집필분과 원전 축약 인용 몇 곳(요 20:29 등)은 감수 요망으로 표기되어 있다.
+  </div>
+</section>
+
+<section id="s5">
+  <h2><span class="no">05</span>제자반 과정 — 「제자의 삶」 11과</h2>
+  <p class="sub">이름부터 내용까지 제자훈련 그 자체인 분기를 정규과정 밖으로 옮겨, 어느 년차 학생이든 등록할 수 있는 독립 과정으로. 부서별 눈높이 버전 4벌 그대로 사용.</p>
+  <div class="tblwrap" style="margin-bottom:16px">
+  <table>
+    <thead><tr><th>부서</th><th>과정 흐름 (11과)</th></tr></thead>
+    <tbody>
+      <tr><td class="yr">유년·초등</td><td>제자의 정체성(1~2) → 자기부인 4연작: 거짓말·욕심·언어습관·이기주의(3~6) → 착한 행실·전도(7~8) → 참 제자의 모델·기도(9~10) → 특강(11)</td></tr>
+      <tr><td class="yr">중등</td><td>부르심·제자도(1~2) → 삶의 영역별 제자도: 공부·교우관계·성·외모·정체성(3~7) → 전도·사도바울·기도(8~10) → 특강: 미디어(11)</td></tr>
+      <tr><td class="yr">고등</td><td>제자의 조건 ①②(1~2) → 영역별 제자도: 공부·관계·성·외모·정체성(3~7) → 전도·참 제자의 모델·기도(8~10) → 특강: 성윤리(11)</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="pair">
+    <div class="panel track-a">
+      <h3>트랙 A — 주간 제자반 · 11주</h3>
+      <p style="font-size:14px;color:var(--ink-soft);margin:0">주 1회, 과 순서 그대로. HOT토론·열매맺기를 소그룹 나눔 중심으로 운영. 8주 이상 출석 + 실천 나눔 3회 수료. 11주차 특강을 수료식과 겸함.</p>
+    </div>
+    <div class="panel track-b">
+      <h3>트랙 B — 수련회 · 2박 3일</h3>
+      <p style="font-size:14px;color:var(--ink-soft);margin:0">1일차 저녁 개막(정체성) → 2일차 자기부인 집중 + HOT토론 대항전 + 헌신의 밤(모델·기도) → 3일차 파송(착한 행실·전도). 특강은 외부 강사 세션 예비분.</p>
+    </div>
+  </div>
+</section>
+
+<section id="s6">
+  <h2><span class="no">06</span>공과 한 과의 구성 — 9모듈</h2>
+  <p class="sub">모든 과는 정원 은유 9모듈로 통일되어 있다. 원전 유·초등판의 정원 은유를 표준으로 삼았고, 중·고등판의 광학 은유(프리즘·돋보기·현미경·거울)는 아래처럼 대응한다.</p>
+  <div class="mods">
+    <div class="mod"><div class="m-head"><span class="m-no">1</span><span class="m-name">터다지기</span><span class="m-optic">≒ 프리즘</span></div>
+      <p>주제에 대한 학생들의 다양한 생각을 먼저 듣는다 — 말씀을 심을 토양 준비.</p></div>
+    <div class="mod"><div class="m-head"><span class="m-no">2</span><span class="m-name">씨앗심기</span><span class="m-optic">≒ 성경 돋보기</span></div>
+      <p>본문 말씀과 핵심 설명으로 생각의 토양에 말씀을 심는다.</p></div>
+    <div class="mod"><div class="m-head"><span class="m-no">3</span><span class="m-name">물주기</span><span class="m-optic">≒ 볼록렌즈</span></div>
+      <p>예화·심화 설명으로 다양한 생각이 성경적 관점으로 모이게 한다.</p></div>
+    <div class="mod"><div class="m-head"><span class="m-no">4</span><span class="m-name">햇빛비추기</span><span class="m-optic">≒ Today's Focus</span></div>
+      <p>이 과가 보여주는 성경의 관점을 한 단락으로 요약 제시.</p></div>
+    <div class="mod"><div class="m-head"><span class="m-no">5</span><span class="m-name">꽃피우기</span><span class="m-optic">≒ 현미경</span></div>
+      <p>성경적 관점으로 삶의 현실을 들여다보는 적용 질문.</p></div>
+    <div class="mod"><div class="m-head"><span class="m-no">6</span><span class="m-name">HOT토론</span><span class="m-optic">토론의 중심</span></div>
+      <p>일반적 세계관과 성경적 세계관이 부딪히는 팀 토론 — 쌍방향 학습의 핵.</p></div>
+    <div class="mod"><div class="m-head"><span class="m-no">7</span><span class="m-name">분별력 키우기</span><span class="m-optic">= Discernments</span></div>
+      <p>과의 핵심 진리와 세상의 거짓 메시지를 대조하는 생활 원리 문장.</p></div>
+    <div class="mod"><div class="m-head"><span class="m-no">8</span><span class="m-name">열매맺기</span><span class="m-optic">≒ 오목렌즈</span></div>
+      <p>말씀대로 살아가는 실천 다짐과 행동 과제.</p></div>
+    <div class="mod"><div class="m-head"><span class="m-no">9</span><span class="m-name">외울말씀</span><span class="m-optic">≒ 거울 · 말씀의 창</span></div>
+      <p>주제 핵심 구절 암송(개역개정) — 일상에서 성경적 세계관을 붙드는 닻.</p></div>
+    <div class="mod aux"><div class="m-head"><span class="m-no">+</span><span class="m-name">읽을거리 · 교사용 가이드</span></div>
+      <p>보조 콘텐츠(원전 보강분 포함)와 교사 진행 팁 — 무손실 원칙의 안전망.</p></div>
+  </div>
+  <div class="callout">
+    <b>운영 골격(원전).</b> 부서 사역자가 매주 '동일한 주제의 다른 본문'으로 설교한 뒤 공과를 진행한다 — 설교와 공과가 한 주제로 맞물리는 구조. 목적은 이원론 극복: 주일의 신앙과 월~토의 삶을 하나로.
+  </div>
+</section>
+
+<section id="s7">
+  <h2><span class="no">07</span>재편 진행 현황</h2>
+  <p class="sub">모든 단계는 백업 → 실행 → 원본 대조 검증(diff=0) 순으로 진행되며 git 앵커(pre-jaepyeon-20260706)로 전체 되돌리기가 가능하다.</p>
+  <div class="steps">
+    <div class="step"><span class="st done">완료</span><span class="s-name">P0 백업</span><span class="s-note">1년차 176과 백업 + git 앵커 태그</span></div>
+    <div class="step"><span class="st done">완료</span><span class="s-name">P1 제자반 분리</span><span class="s-note">44과 무변경 이동(diff=0) + 운영가이드</span></div>
+    <div class="step"><span class="st done">완료</span><span class="s-name">P2 1년차 밀기</span><span class="s-note">4부서 폴더 이동, 백업 대조 diff=0</span></div>
+    <div class="step"><span class="st done">완료</span><span class="s-name">P3 새 1분기 조판</span><span class="s-note">44과(11과×4부서) 원문 무손실 조판 — 부서별 검수 합격</span></div>
+    <div class="step"><span class="st run">진행중</span><span class="s-name">P4 역방향 흡수·차별화 감수</span><span class="s-note">원전 2부 고유 콘텐츠 → 기존 과 읽을거리 보강, 분기 연결 문장</span></div>
+    <div class="step"><span class="st done">완료</span><span class="s-name">P5 원전 총론 보존</span><span class="s-note">발간사·추천사·교육 철학·모듈 매핑 → 파운데이션 문서</span></div>
+    <div class="step"><span class="st wait">대기</span><span class="s-name">P6 색인·상호참조 갱신</span><span class="s-note">커리큘럼 정전 그리드·전체 인덱스·세션 상태 갱신</span></div>
+  </div>
+</section>
+
+<footer>
+  삶이 있는 신앙 공과 캠페인 · 커리큘럼 재편 구조도 · 원전: 『삶이있는신앙시리즈 1』(2024, 집필 이재섭·임효준·이승목·박종현·김장인) · 이 문서는 재편 진행에 따라 갱신됩니다.
+</footer>
+
+</div>
+</body></html>
