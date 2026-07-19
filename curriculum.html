@@ -68,34 +68,61 @@
     display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.6em}
   .cpass{font-size:11.5px;color:var(--ink-soft);display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
 
-  /* 모달 */
-  .modal-bg{position:fixed;inset:0;background:rgba(20,28,22,.55);backdrop-filter:blur(3px);
-    display:none;align-items:center;justify-content:center;z-index:60;padding:20px}
-  .modal-bg.on{display:flex}
-  .modal{background:#fff;border-radius:18px;max-width:560px;width:100%;max-height:88vh;overflow:auto;
-    box-shadow:0 24px 70px rgba(0,0,0,.32)}
-  .m-cover{aspect-ratio:16/9;background:var(--dept-bg);position:relative}
-  .m-cover img{width:100%;height:100%;object-fit:cover;display:block}
-  .m-close{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;border:none;
-    background:rgba(255,255,255,.9);font-size:19px;cursor:pointer;line-height:1;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.18)}
-  .m-body{padding:20px 24px 26px}
-  .m-crumb{font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--dept);margin:0 0 6px}
-  .m-body h2{font-size:21px;font-weight:800;margin:0 0 14px;color:var(--ink);line-height:1.25}
-  .m-row{display:flex;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
-  .m-row .lbl{flex:0 0 82px;color:var(--ink-soft);font-weight:700;font-size:12.5px;padding-top:1px}
-  .m-row .val{flex:1;color:var(--ink)}
-  .m-sum{margin-top:14px;background:var(--dept-bg);border-radius:12px;padding:14px 16px;font-size:13.7px;color:var(--ink);line-height:1.65}
-  .m-sum .lbl{font-size:11.5px;font-weight:700;letter-spacing:.05em;color:var(--dept);text-transform:uppercase;display:block;margin-bottom:5px}
-  .m-note{margin-top:12px;font-size:11.5px;color:var(--ink-soft)}
+  /* 리더(전문) */
+  .rd-bg{position:fixed;inset:0;background:rgba(20,28,22,.5);backdrop-filter:blur(3px);
+    display:none;align-items:flex-start;justify-content:center;z-index:60;padding:0;overflow-y:auto}
+  .rd-bg.on{display:flex}
+  .reader{background:#fff;width:100%;max-width:820px;min-height:100vh;box-shadow:0 0 60px rgba(0,0,0,.3);
+    display:flex;flex-direction:column}
+  .rd-top{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);
+    padding:14px 26px;display:flex;align-items:center;gap:14px}
+  .rd-back{appearance:none;border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:7px 13px;
+    font-family:inherit;font-size:13.5px;font-weight:700;color:var(--ink-soft);cursor:pointer;white-space:nowrap}
+  .rd-back:hover{border-color:var(--dept);color:var(--dept)}
+  .rd-toggle{margin-left:auto;display:inline-flex;background:var(--dept-bg);border-radius:10px;padding:3px}
+  .rd-toggle button{appearance:none;border:none;background:transparent;font-family:inherit;font-weight:700;
+    font-size:13.5px;color:var(--ink-soft);padding:7px 16px;border-radius:8px;cursor:pointer}
+  .rd-toggle button[aria-pressed="true"]{background:#fff;color:var(--dept-deep);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+  .rd-hero{position:relative;aspect-ratio:21/9;background:var(--dept-bg);overflow:hidden}
+  .rd-hero img{width:100%;height:100%;object-fit:cover;display:block}
+  .rd-head{padding:22px 26px 6px}
+  .rd-crumb{font-size:12px;font-weight:700;letter-spacing:.03em;color:var(--dept);margin:0 0 6px}
+  .rd-head h1{font-size:clamp(21px,3.5vw,28px);font-weight:800;margin:0 0 14px;color:var(--ink);line-height:1.24}
+  .rd-facts{display:flex;flex-direction:column;gap:0;margin:0 0 6px;border:1px solid var(--dept-line);border-radius:12px;overflow:hidden}
+  .rd-facts .rf{display:flex;gap:12px;padding:10px 15px;font-size:14px;background:#fff}
+  .rd-facts .rf+.rf{border-top:1px solid var(--dept-line)}
+  .rd-facts .rf .lbl{flex:0 0 84px;color:var(--dept-deep);font-weight:700;font-size:12.5px}
+  .rd-facts .rf .val{flex:1;color:var(--ink)}
+  .rd-content{padding:16px 26px 60px;font-size:15.5px;line-height:1.72;color:var(--ink)}
+  .rd-content .mod{padding:6px 0 4px;margin:0 0 6px}
+  .rd-content .mod>h2{font-size:16px;font-weight:800;color:#fff;background:var(--dept);display:inline-block;
+    padding:5px 14px;border-radius:8px;margin:26px 0 12px;letter-spacing:.01em}
+  .rd-content h3{font-size:15.5px;font-weight:800;color:var(--dept-deep);margin:18px 0 6px}
+  .rd-content h4{font-size:14.5px;font-weight:700;color:var(--ink);margin:14px 0 4px}
+  .rd-content p{margin:0 0 11px}
+  .rd-content ul,.rd-content ol{margin:0 0 12px;padding-left:22px}
+  .rd-content li{margin:3px 0}
+  .rd-content blockquote{margin:12px 0;padding:12px 16px;background:var(--dept-bg);
+    border-left:4px solid var(--dept);border-radius:0 10px 10px 0;color:var(--ink)}
+  .rd-content blockquote p:last-child{margin:0}
+  .rd-content hr{border:none;border-top:1px dashed var(--dept-line);margin:20px 0}
+  .rd-content .tw{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:10px}
+  .rd-content table{border-collapse:collapse;width:100%;font-size:14px}
+  .rd-content th{background:var(--dept-bg);color:var(--dept-deep);text-align:left;padding:9px 13px;font-weight:700;border-bottom:1px solid var(--line);white-space:nowrap}
+  .rd-content td{padding:9px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  .rd-content tr:last-child td{border-bottom:none}
+  .rd-note{margin:6px 26px 0;font-size:11.5px;color:var(--ink-soft)}
+  .rd-loading{padding:60px 26px;text-align:center;color:var(--ink-soft);font-size:14px}
   footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--ink-soft);font-size:13px}
-  @media (max-width:520px){ .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:11px} }
+  @media (max-width:520px){ .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:11px}
+    .rd-top,.rd-head,.rd-content{padding-left:16px;padding-right:16px} }
 </style>
 </head>
 <body>
 <header class="hero"><div class="wrap">
   <p class="eyebrow">삶이 있는 신앙 · 주일학교 공과 커리큘럼</p>
   <h1>전 과정 공과 지도 — 4부서 × 3년 × 4분기</h1>
-  <p class="lede">유년부·초등부·중등부·고등부 네 부서가 같은 3년 나선형 여정을 부서 눈높이의 다른 본문·제목으로 배웁니다. 아래에서 부서를 고르고, 각 과를 누르면 본문·외울말씀·핵심 메시지 요약이 열립니다.</p>
+  <p class="lede">유년부·초등부·중등부·고등부 네 부서가 같은 3년 나선형 여정을 부서 눈높이의 다른 본문·제목으로 배웁니다. 아래에서 부서를 고르고, 각 과를 누르면 <b>전문</b>이 열립니다 — <b>학생용</b>(이야기·질문·활동)과 <b>교사용</b>(오늘의 목적·교사 가이드·분별력·HOT토론)을 전환해 볼 수 있습니다.</p>
   <div class="meta"><span><b id="mCount">528</b>개 공과</span><span>·</span><span>4개 부서</span><span>·</span><span>36개 분기</span></div>
   <a class="backlink" href="./index.html">← 커리큘럼 재편 구조도</a> &nbsp;<a class="backlink" href="./report.html">본문 중복 점검 결과</a>
 </div></header>
@@ -103,16 +130,23 @@
 <nav class="tabs"><div class="wrap" id="tabbar"></div></nav>
 <main class="wrap" id="stage"></main>
 
-<div class="modal-bg" id="modalBg">
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
-    <div class="m-cover" id="mCover"><button class="m-close" id="mClose" aria-label="닫기">✕</button></div>
-    <div class="m-body">
-      <p class="m-crumb" id="mCrumb"></p>
-      <h2 id="mTitle"></h2>
-      <div id="mRows"></div>
-      <div class="m-sum" id="mSumWrap" hidden><span class="lbl">과 개요</span><span id="mSum"></span></div>
-      <p class="m-note">※ 요약 정보입니다. 정본 전문(HOT토론·교사가이드 포함)은 비공개입니다.</p>
+<div class="rd-bg" id="rdBg">
+  <div class="reader" id="reader" role="dialog" aria-modal="true" aria-labelledby="rdTitle">
+    <div class="rd-top">
+      <button class="rd-back" id="rdBack">← 목록</button>
+      <div class="rd-toggle" role="group" aria-label="보기 전환">
+        <button id="tabStu" aria-pressed="true">학생용</button>
+        <button id="tabTea" aria-pressed="false">교사용</button>
+      </div>
     </div>
+    <div class="rd-hero" id="rdHero"></div>
+    <div class="rd-head">
+      <p class="rd-crumb" id="rdCrumb"></p>
+      <h1 id="rdTitle"></h1>
+      <div class="rd-facts" id="rdFacts"></div>
+    </div>
+    <p class="rd-note" id="rdNote"></p>
+    <div class="rd-content" id="rdContent"></div>
   </div>
 </div>
 
@@ -233,7 +267,7 @@ function render(){
   $('stage').innerHTML=html;
   // 카드 이벤트
   $('stage').querySelectorAll('.card').forEach(c=>{
-    c.onclick=()=>openModal(dm, findLesson(dep, +c.dataset.y, +c.dataset.q, +c.dataset.no));
+    c.onclick=()=>openReader(CUR, findLesson(dep, +c.dataset.y, +c.dataset.q, +c.dataset.no));
   });
 }
 function cardHTML(dm,L){
@@ -251,21 +285,54 @@ function findLesson(dep,y,q,no){
 }
 function esc(s){return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 
-function openModal(dm,L){
-  applyDeptVars(dm);
-  $('mCover').innerHTML=`<button class="m-close" id="mClose" aria-label="닫기">✕</button>`+
-    (L.img?`<img src="${L.img}" alt="">`:coverSVG(dm,{...L,_id:'m'}).replace('class="cover"','class="cover" style="height:100%"'));
-  $('mClose').onclick=closeModal;
-  $('mCrumb').textContent=`${dm.dept} · ${L._y}년차 ${L._q}분기 · ${L.no}과`;
-  $('mTitle').textContent=L.title;
-  const rows=[['본문',L.passage],['외울말씀',L.verse],['핵심 메시지',L.core]].filter(r=>r[1]);
-  $('mRows').innerHTML=rows.map(r=>`<div class="m-row"><span class="lbl">${r[0]}</span><span class="val">${esc(r[1])}</span></div>`).join('');
-  if(L.summary){ $('mSum').textContent=L.summary; $('mSumWrap').hidden=false; } else { $('mSumWrap').hidden=true; }
-  $('modalBg').classList.add('on'); document.body.style.overflow='hidden';
+/* ---------- 전문 리더 ---------- */
+const DEPTCACHE={};      // di -> {'y-q-no':{t,s}}
+let RD={di:0,L:null,view:'s'};
+
+async function loadDept(di){
+  if(DEPTCACHE[di]) return DEPTCACHE[di];
+  const r=await fetch(`data/dept${di}.json`);
+  DEPTCACHE[di]=await r.json();
+  return DEPTCACHE[di];
 }
-function closeModal(){ $('modalBg').classList.remove('on'); document.body.style.overflow=''; }
-$('modalBg').addEventListener('click',e=>{ if(e.target===$('modalBg')) closeModal(); });
-document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
+function openReader(di,L){
+  const dm=DEPT_META[di]; applyDeptVars(dm);
+  RD={di,L,view:'s'};
+  $('rdHero').innerHTML=L.img?`<img src="${L.img}" alt="">`:coverSVG(dm,{...L,_id:'rd'}).replace('class="cover"','class="cover" style="height:100%;width:100%"');
+  $('rdCrumb').textContent=`${dm.dept} · ${L._y}년차 ${L._q}분기 · ${L.no}과`;
+  $('rdTitle').textContent=L.title;
+  const rows=[['본문',L.passage],['외울말씀',L.verse],['핵심',L.core]].filter(r=>r[1]);
+  $('rdFacts').innerHTML=rows.map(r=>`<div class="rf"><span class="lbl">${r[0]}</span><span class="val">${esc(r[1])}</span></div>`).join('');
+  setView('s');
+  $('rdBg').classList.add('on'); document.body.style.overflow='hidden'; $('reader').scrollTop=0; $('rdBg').scrollTop=0;
+  $('rdContent').innerHTML=`<div class="rd-loading">불러오는 중…</div>`;
+  loadDept(di).then(data=>{
+    const rec=data[`${L._y}-${L._q}-${L.no}`];
+    RD.rec=rec; renderContent();
+  }).catch(()=>{ $('rdContent').innerHTML=`<div class="rd-loading">내용을 불러오지 못했습니다.</div>`; });
+}
+function setView(v){
+  RD.view=v;
+  $('tabStu').setAttribute('aria-pressed', v==='s'); $('tabTea').setAttribute('aria-pressed', v==='t');
+  $('rdNote').textContent = v==='t'
+    ? '교사용 — 오늘의 목적·교사 가이드·분별력·HOT토론 해설 포함 전문입니다.'
+    : '학생용 — 학생이 대면하는 이야기·질문·활동 중심으로 정리했습니다.';
+  if(RD.rec) renderContent();
+}
+function renderContent(){
+  const rec=RD.rec;
+  if(!rec){ $('rdContent').innerHTML=`<div class="rd-loading">준비 중인 과입니다.</div>`; return; }
+  const html=rec[RD.view]||rec[RD.view==='s'?'t':'s']||'';
+  $('rdContent').innerHTML=html||`<div class="rd-loading">표시할 내용이 없습니다.</div>`;
+  document.querySelector('.rd-content').scrollTop=0;
+  $('reader').parentElement.scrollTop=0;
+}
+$('tabStu').onclick=()=>setView('s');
+$('tabTea').onclick=()=>setView('t');
+function closeReader(){ $('rdBg').classList.remove('on'); document.body.style.overflow=''; }
+$('rdBack').onclick=closeReader;
+$('rdBg').addEventListener('click',e=>{ if(e.target===$('rdBg')) closeReader(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape' && $('rdBg').classList.contains('on')) closeReader(); });
 
 render();
 </script>
