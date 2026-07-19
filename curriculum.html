@@ -215,19 +215,15 @@ function motifFor(title,core){
   return 'sprout';
 }
 function coverSVG(dm, L){
-  const m=motifFor(L.title, L.core);
-  const bg1=dm.bg, bg2='#ffffff';
-  return `<div class="cover" style="color:${dm.accent}">
-    <svg viewBox="0 0 100 100" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs><radialGradient id="g${dm.key}${L._id}" cx="38%" cy="30%" r="85%">
-        <stop offset="0%" stop-color="${bg2}"/><stop offset="100%" stop-color="${bg1}"/></radialGradient></defs>
-      <rect width="100" height="100" fill="url(#g${dm.key}${L._id})"/>
-      <circle cx="50" cy="50" r="30" fill="${dm.accent}" opacity="0.09"/>
-      <g transform="translate(20,20) scale(0.6)" style="color:${dm.deep}">${MOTIFS[m]}</g>
-    </svg></div>`;
+  // 일러스트 대기용 깔끔한 부서색 그라데이션 패널(추후 AI 이미지로 대체)
+  const ang = 115 + (((L.no||1) * 27) % 70);
+  const a10 = dm.accent + '1f';   // ~12% alpha
+  return `<div class="cover" style="background:`+
+    `radial-gradient(130% 105% at 26% 18%, #ffffff 0%, ${dm.bg} 62%, ${a10} 100%),`+
+    `linear-gradient(${ang}deg, ${dm.bg} 0%, #ffffff 100%);background-blend-mode:soft-light"></div>`;
 }
 function coverNode(dm, L){
-  // AI 이미지가 있으면 우선, 없으면 SVG 모티프
+  // AI 이미지가 있으면 우선, 없으면 부서색 패널
   if(L.img){ return `<div class="cover"><img src="${L.img}" alt="" loading="lazy"></div>`; }
   return coverSVG(dm, L);
 }
